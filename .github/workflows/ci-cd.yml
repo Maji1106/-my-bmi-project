@@ -1,6 +1,5 @@
 
 name: 'build and deploy react app'
-
 on:
   push:
     branches: 
