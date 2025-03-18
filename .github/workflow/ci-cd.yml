@@ -1,4 +1,5 @@
-name: 'build and deploy vue app'
+
+name: 'build and deploy react app'
 
 on:
   push:
@@ -18,7 +19,7 @@ jobs:
       - name: Build Docker Image
         run: docker build -t ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:latest .
 
-      - name: Verify Vue Build Output
+      - name: Verify React Build Output
         run: |
           CONTAINER_ID=$(docker create ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:latest)
           docker cp $CONTAINER_ID:/usr/share/nginx/html ./dist

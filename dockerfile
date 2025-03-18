@@ -1,4 +1,4 @@
-# ใช้ Node.js เพื่อติดตั้งและ Build Vue.js
+# ใช้ Node.js เพื่อติดตั้งและ Build react app
 FROM node:18 AS builder
 WORKDIR /app
 COPY package.json package-lock.json ./
