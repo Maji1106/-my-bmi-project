@@ -1,4 +1,6 @@
-name: 'Build and Deploy React App'
+
+name: 'build and deploy react app'
+
 on:
   push:
     branches: 
@@ -15,15 +17,14 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t ghcr.io/${{ github.actor }}/my-mbi:latest .
+        run: docker build -t ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:latest .
 
       - name: Verify React Build Output
         run: |
-          CONTAINER_ID=$(docker create ghcr.io/${{ github.actor }}/my-mbi:latest)
+          CONTAINER_ID=$(docker create ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:latest)
           docker cp $CONTAINER_ID:/usr/share/nginx/html ./dist
           docker rm -v $CONTAINER_ID
           ls -la ./dist
-          
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
